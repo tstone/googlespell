@@ -18,12 +18,14 @@ exports.cleanText = function(source, removeCode, removeHtml) {
 
 exports.getContext = function(source, word, start, leftCount, rightCount) {
 
-    var loffset = start - leftCount - 1;
-    var left = loffset > -1 ? source.substr(loffset, leftCount) : source.substr(0, start);
+    var loffset = start - leftCount;
+    var left = loffset > -1 ? source.substr(loffset, leftCount) : source.substr(0, start - 1);
     var right = source.substr(start - 1 + word.length, rightCount);
 
     // Check for new lines
-    if (left.indexOf('\n') > -1) {
+    if (loffset < 0) {
+        // Do nothing
+    } else if (left.indexOf('\n') > -1) {
         left = left.substr(left.lastIndexOf('\n'));
     } else {
         // Otherwise find the first space and chop from there

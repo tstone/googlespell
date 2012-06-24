@@ -63,7 +63,7 @@ In the above example, the suggestion returned would look like this:
 
     { offset: 12
       confidence: 1
-      word: 'example',
+      word: 'exmaple',
       words: [ 'example', 'ex maple', 'ex-maple', 'exampled', 'examples' ],
       context: 'This is an [exmaple]' }
 
