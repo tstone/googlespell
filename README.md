@@ -71,7 +71,7 @@ In the above example, the suggestion returned would look like this:
       words: [ 'example', 'ex maple', 'ex-maple', 'exampled', 'examples' ],
       context: 'This is an [exmaple]' }
 
-### Custom Dictionary
+### Custom/Local Dictionary
 
 It's possible to have a custom dictionary with domain-specific or user-added words.  The `dictionary` configuration option of checker takes either a path to a file or an array of strings.
 
