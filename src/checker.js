@@ -22,7 +22,7 @@ var Checker = function(config){
         if (Array.isArray(config.dictionary)) {
             this.config.dictionary = config.dictionary;
         } else {
-            this.config.dictionary = fs.readFileSync(config.dictionary, 'utf8').split('\n');
+            this.config.dictionary = fs.readFileSync(config.dictionary, 'utf8').split('\n').map(function(x) { return x.trim(); });
         }
     } else {
         this.config.dictionary = [];
