@@ -2,7 +2,8 @@
 var xml2js      = require('xml2js'),
     request     = require('request'),
     _           = require('underscore'),
-    lib         = require('./lib');
+    lib         = require('./lib'),
+    Result      = require('./result');
 
 var Checker = function(config){
     this.config = _.extend({
@@ -30,20 +31,11 @@ Checker.prototype.check = function(s, callback){
         } else {
             var parser = new xml2js.Parser({ attrkey: 'attrs', charkey: 'chars' });
             parser.parseString(body, function(err, result){
-                result = lib.formatResult(result, text);
-
-                // Remove suggestions below confidence threshold
-                var threshold = this.config.threshold;
-                result.suggestions = result.suggestions.reduce(function(acc, x){
-                    if (x.confidence >= threshold) { acc.push(x); }
-                    return acc;
-                }, []);
-
-                if (typeof callback === 'function') { callback(undefined, result); }
+                if (typeof callback === 'function') { callback(undefined, new Result(result, text, this.config)); }
             }.bind(this));
         }
     }.bind(this));
 
 };
 
-module.exports.Checker = exports.Checker = Checker;
+module.exports = Checker;

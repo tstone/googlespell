@@ -23,7 +23,7 @@
         "url": "http://github.com/tstone/googlespell.git",
         "web": "http://github.com/tstone/googlespell"
     },
-    "main": "src/spell.js",
+    "main": "src/index.js",
     "engines": {
           "node": "0.6.x",
           "npm": "1.0.x"
