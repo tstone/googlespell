@@ -27,10 +27,10 @@ var Result = function(base, source, config) { this.__init(base, source, config);
 
         var sugObj = function(o) {
             var sug =  {
-                offset: o.attrs.o,
-                confidence: o.attrs.s,
+                offset: parseInt(o.attrs.o, 10),
+                confidence: parseInt(o.attrs.s, 10),
                 word: this.source.substr(o.attrs.o - 1, o.attrs.l),
-                words: o.chars.split('\t'),
+                words: o.chars.split('\t')
             };
             sug.context = lib.getContext(source, sug.word, sug.offset, 50, 30);
             return sug;
@@ -44,6 +44,7 @@ var Result = function(base, source, config) { this.__init(base, source, config);
 
         Array.isArray(xs) ? xs.forEach(addSug) : addSug(xs);
         this.suggestions = suggestions;
+        console.log(suggestions);
     };
 
 
