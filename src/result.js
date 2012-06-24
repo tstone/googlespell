@@ -22,6 +22,7 @@ var Result = function(base, source, config) { this.__init(base, source, config);
     cls.__parseSuggestions = function(xs){
         var suggestions = [];
         var source = this.source;
+        var dict = this.config.dictionary;
         var threshold = this.config.threshold;
 
         var sugObj = function(o) {
@@ -34,12 +35,13 @@ var Result = function(base, source, config) { this.__init(base, source, config);
             sug.context = lib.getContext(source, sug.word, sug.offset, 50, 30);
             return sug;
         }.bind(this);
+
         var addSug = function(x) {
             var sug = sugObj(x);
-            if (sug.confidence >= threshold) {
+            if (dict.indexOf(sug.word) === -1 && sug.confidence >= threshold) {
                 suggestions.push(sug);
             }
-        };
+        }.bind(this);
 
         Array.isArray(xs) ? xs.forEach(addSug) : addSug(xs);
         return suggestions;

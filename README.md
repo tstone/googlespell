@@ -34,6 +34,7 @@ Usage
     ignoreCode:     Completely remove all <code> tags. // (default: true)
     language:       Language to check against. // (default: 'en')
     threshold:      Filter suggestions based on Google's confidence level. // (default: 0)
+    dictionary:     String (file path) or array of strings (word list)
 
 ### Doing the Check
 
@@ -69,4 +70,17 @@ In the above example, the suggestion returned would look like this:
       word: 'exmaple',
       words: [ 'example', 'ex maple', 'ex-maple', 'exampled', 'examples' ],
       context: 'This is an [exmaple]' }
+
+### Custom Dictionary
+
+It's possible to have a custom dictionary with domain-specific or user-added words.  The `dictionary` configuration option of checker takes either a path to a file or an array of strings.
+
+For a dictionary file, the words should be `\n` terminated, one on each line.
+
+Example:
+
+    var checker = new googlespell.Checker({ dictionary: [ 'js' ]});
+    checker.check('This is written in js.', function(err, result){
+        // result.suggestions === [];
+    });
 

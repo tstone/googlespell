@@ -3,7 +3,8 @@ var xml2js      = require('xml2js'),
     request     = require('request'),
     _           = require('underscore'),
     lib         = require('./lib'),
-    Result      = require('./result');
+    Result      = require('./result'),
+    fs          = require('fs');
 
 var Checker = function(config){
     this.config = _.extend({
@@ -15,6 +16,17 @@ var Checker = function(config){
         language: 'en',
         threshold: 0
     }, config);
+
+    // Setup dictionary
+    if (config.dictionary) {
+        if (Array.isArray(config.dictionary)) {
+            this.config.dictionary = config.dictionary;
+        } else {
+            this.config.dictionary = fs.readFileSync(config.dictionary, 'utf8').split('\n');
+        }
+    } else {
+        this.config.dictionary = [];
+    }
 };
 
 Checker.prototype.check = function(s, callback){
