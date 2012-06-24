@@ -1,6 +1,6 @@
 {
     "name": "googlespell",
-    "version":  "0.0.1",
+    "version":  "0.0.2",
     "description": "A node module for the undocumented google spell API",
     "homepage": "http://github.com/tstone/googlespell",
     "keywords": [ "spell check", "spell", "google" ],
@@ -25,7 +25,6 @@
     },
     "main": "src/index.js",
     "engines": {
-          "node": "0.6.x",
-          "npm": "1.0.x"
+        "node": ">= 0.6.x"
     }
 }
