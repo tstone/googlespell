@@ -31,7 +31,8 @@ Checker.prototype.check = function(s, callback){
         } else {
             var parser = new xml2js.Parser({ attrkey: 'attrs', charkey: 'chars' });
             parser.parseString(body, function(err, result){
-                if (typeof callback === 'function') { callback(undefined, new Result(result, text, this.config)); }
+                var r = new Result(result, text, this.config);
+                if (typeof callback === 'function') { callback(undefined, r); }
             }.bind(this));
         }
     }.bind(this));

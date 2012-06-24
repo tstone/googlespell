@@ -17,7 +17,6 @@ var Result = function(base, source, config) { this.__init(base, source, config);
         } else {
             this.suggestions = [];
         }
-
     };
 
     cls.__parseSuggestions = function(xs){
@@ -43,7 +42,7 @@ var Result = function(base, source, config) { this.__init(base, source, config);
         };
 
         Array.isArray(xs) ? xs.forEach(addSug) : addSug(xs);
-        this.suggestions = suggestions;
+        return suggestions;
     };
 
 
