@@ -2,6 +2,20 @@
 var _  = require('underscore');
 
 
+exports.cleanText = function(source, removeCode, removeHtml) {
+
+    if (removeCode) {
+        source = source.replace(/<code[^>]+>[\s\S]*?<\/code>/gi, '');
+    }
+
+    if (removeHtml) {
+        source = source.replace(/<[^>]+>/gi, '');
+    }
+
+    return source;
+
+};
+
 exports.formatResult = function(resp, source) {
 
     var sugObj = function(o) {
