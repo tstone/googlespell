@@ -44,7 +44,10 @@ Once the checker is initialized call the `.check` method.
 Example:
 
     var googlespell = require('googlespell');
-    var checker     = new googlespell.Checker();
+    var checker     = new googlespell.Checker({
+        threshold: 1,
+        language: 'en'
+    });
 
     checker.check('This is an exmaple', function(err, result) {
         console.log(result);
