@@ -1,5 +1,5 @@
 
-var _  = require('underscore');
+
 
 
 exports.cleanText = function(source, removeCode, removeHtml) {
@@ -16,34 +16,27 @@ exports.cleanText = function(source, removeCode, removeHtml) {
 
 };
 
-exports.formatResult = function(resp, source) {
+exports.getContext = function(source, word, start, leftCount, rightCount) {
 
-    var sugObj = function(o) {
-        return {
-            offset: o.attrs.o,
-            confidence: o.attrs.s,
-            word: source.substr(o.attrs.o - 1, o.attrs.l),
-            words: o.chars.split('\t')
-        };
-    };
+    var loffset = start - leftCount - 1;
+    var left = loffset > -1 ? source.substr(loffset, leftCount) : source.substr(0, start);
+    var right = source.substr(start - 1 + word.length, rightCount);
 
-    // Carry over root attributes
-    var root = _.extend({ suggestions: [] }, resp.attrs);
-
-    // Format suggestions
-    if (resp.c) {
-        if (Array.isArray(resp.c)) {
-            root.suggestions = resp.c.map(function(x){
-                return sugObj(x);
-            });
-        } else {
-            root.suggestions = [
-                sugObj(resp.c)
-            ];
-        }
+    // Check for new lines
+    if (left.indexOf('\n') > -1) {
+        left = left.substr(left.lastIndexOf('\n'));
+    } else {
+        // Otherwise find the first space and chop from there
+        left = left.substr(left.indexOf(' '));
     }
 
-    return root;
+    if (right.indexOf('\n') > -1) {
+        right = right.substr(0, right.indexOf('\n'));
+    } else {
+        right = right.substr(0, right.lastIndexOf(' '));
+    }
+
+    return (left + '[' + word + ']' + right).trim();
 };
 
 exports.reqXml = function(s, config) {

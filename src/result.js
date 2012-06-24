@@ -1,6 +1,7 @@
 
 
-var _  = require('underscore');
+var _       = require('underscore'),
+    lib     = require('./lib');
 
 
 var Result = function(base, source, config) { this.__init(base, source, config); };
@@ -21,15 +22,18 @@ var Result = function(base, source, config) { this.__init(base, source, config);
 
     cls.__parseSuggestions = function(xs){
         var suggestions = [];
+        var source = this.source;
         var threshold = this.config.threshold;
 
         var sugObj = function(o) {
-            return {
+            var sug =  {
                 offset: o.attrs.o,
                 confidence: o.attrs.s,
                 word: this.source.substr(o.attrs.o - 1, o.attrs.l),
-                words: o.chars.split('\t')
+                words: o.chars.split('\t'),
             };
+            sug.context = lib.getContext(source, sug.word, sug.offset, 50, 30);
+            return sug;
         }.bind(this);
         var addSug = function(x) {
             var sug = sugObj(x);
@@ -41,6 +45,7 @@ var Result = function(base, source, config) { this.__init(base, source, config);
         Array.isArray(xs) ? xs.forEach(addSug) : addSug(xs);
         this.suggestions = suggestions;
     };
+
 
 }(Result.prototype));
 
