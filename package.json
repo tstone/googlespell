@@ -1,7 +1,7 @@
 {
     "name": "googlespell",
     "version":  "0.0.1",
-    "description": "",
+    "description": "A node module for the undocumented google spell API",
     "homepage": "http://github.com/tstone/googlespell",
     "keywords": [ "spell check", "spell", "google" ],
     "author": {
@@ -15,14 +15,15 @@
     }],
     "dependencies": {
         "xml2js": ">= 0.1.x",
-        "request": ">= 2.x.x"
+        "request": ">= 2.x.x",
+        "underscore": ">= 1.x.x"
     },
     "repository": {
         "type": "git",
         "url": "http://github.com/tstone/googlespell.git",
         "web": "http://github.com/tstone/googlespell"
     },
-    "main": "index.js",
+    "main": "src/spell.js",
     "engines": {
           "node": "0.6.x",
           "npm": "1.0.x"
