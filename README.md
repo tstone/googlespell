@@ -1,4 +1,6 @@
-[![build status](https://secure.travis-ci.org/tstone/googlespell.png)](http://travis-ci.org/tstone/googlespell)
+Google has canceled the spelling service:
+https://tracker.moodle.org/browse/MDL-38867
+
 
 googlespell
 ===========
