@@ -1,4 +1,6 @@
-Google has canceled the spelling service:
+## UPDATE: Google has canceled the spelling service:
+
+See:
 https://tracker.moodle.org/browse/MDL-38867
 
 
